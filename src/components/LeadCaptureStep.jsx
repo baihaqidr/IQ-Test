@@ -25,11 +25,15 @@ export default function LeadCaptureStep({ onSubmit }) {
       {/* Top Badge */}
       <div className="text-center mb-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#F26207] text-xs font-semibold mb-3 font-mono">
-          <div className="w-3 h-3">
+          <div className="w-3.5 h-3.5">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
-              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
-              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              <path
+                d="M24 9.5C22 7.3 19.1 6 16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C19.1 26 22 24.7 24 22.5"
+                stroke="#F26207"
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+              <circle cx="16" cy="16" r="3" fill="#0B1419" />
             </svg>
           </div>
           <span>Hasil Kognitif Terkalibrasi</span>
@@ -105,7 +109,7 @@ export default function LeadCaptureStep({ onSubmit }) {
 
       <div className="mt-6 text-center text-xs text-neutral-400 flex items-center justify-center gap-1.5">
         <ShieldCheck className="w-4 h-4 text-emerald-600" />
-        <span>cognitive™ menjamin 100% privasi dan enkripsi data pribadi Anda.</span>
+        <span>cognitive menjamin 100% privasi dan enkripsi data pribadi Anda.</span>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export default function CheckoutModal({ isOpen, onClose, user, score, licenseId,
         {!isPaid ? (
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#F26207] uppercase tracking-wider mb-2 font-mono">
-              <Lock className="w-3.5 h-3.5" /> cognitive™ Secure Checkout
+              <Lock className="w-3.5 h-3.5" /> cognitive Secure Checkout
             </div>
             <h3 className="text-xl font-black text-[#0B1419]">
               Selesaikan Pembayaran

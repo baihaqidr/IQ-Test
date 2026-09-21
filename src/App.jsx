@@ -184,12 +184,16 @@ export default function App() {
           <div className="flex items-center gap-2">
             <div className="w-4 h-4">
               <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-                <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
-                <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
-                <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+                <path
+                  d="M24 9.5C22 7.3 19.1 6 16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C19.1 26 22 24.7 24 22.5"
+                  stroke="#F26207"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                />
+                <circle cx="16" cy="16" r="3" fill="#0B1419" />
               </svg>
             </div>
-            <p>© 2026 cognitive™ Lab. All Rights Reserved.</p>
+            <p>© 2026 cognitive Lab. All Rights Reserved.</p>
           </div>
           <div className="flex items-center gap-4 text-[11px] text-neutral-500">
             <span className="hover:text-neutral-800 cursor-pointer">Privacy</span>

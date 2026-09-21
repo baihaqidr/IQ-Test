@@ -24,15 +24,19 @@ export default function DemographicsStep({ onStart }) {
     <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
       {/* Hero Badge */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-[#0B1419] text-xs font-semibold mb-4 font-mono">
-          <div className="w-3.5 h-3.5 flex items-center justify-center shrink-0">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-[#0B1419] text-xs font-semibold mb-4 font-mono">
+          <div className="w-4 h-4 flex items-center justify-center shrink-0">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
-              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
-              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              <path
+                d="M24 9.5C22 7.3 19.1 6 16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C19.1 26 22 24.7 24 22.5"
+                stroke="#F26207"
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+              <circle cx="16" cy="16" r="3" fill="#0B1419" />
             </svg>
           </div>
-          <span>cognitive™ • WAIS-IV Standard</span>
+          <span>cognitive • WAIS-IV Standard</span>
         </div>
         
         <h1 className="text-3xl sm:text-4xl font-black text-[#0B1419] tracking-tight leading-tight">

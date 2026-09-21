@@ -18,33 +18,29 @@ export default function Header({ currentStep, totalSteps, isQuizActive }) {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-neutral-200/80 transition-all">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Brand: cognitive with Geometric C Monogram */}
+        {/* Brand: Option 2 Neural Aperture C + clean 'cognitive' wordmark */}
         <div className="flex items-center gap-2.5">
-          {/* Modular Geometric "C" Logo SVG */}
-          <div className="w-7 h-7 shrink-0 flex items-center justify-center">
+          {/* Option 2 Logo: Neural Aperture C */}
+          <div className="w-8 h-8 shrink-0 flex items-center justify-center">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              {/* Top Bar of C */}
-              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
-              {/* Left Pillar of C */}
-              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
-              {/* Bottom Bar of C */}
-              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              <path
+                d="M24 9.5C22 7.3 19.1 6 16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C19.1 26 22 24.7 24 22.5"
+                stroke="#F26207"
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+              <circle cx="16" cy="16" r="3" fill="#0B1419" />
             </svg>
           </div>
           
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-black text-xl text-[#0B1419] tracking-tight font-sans">
-              cognitive
-            </span>
-            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">
-              assessment™
-            </span>
-          </div>
+          <span className="font-black text-2xl text-[#0B1419] tracking-tight font-sans">
+            cognitive
+          </span>
         </div>
 
         {/* Right side: Clean Minimalist Timer */}
         {isQuizActive && (
-          <div className="flex items-center gap-1.5 text-neutral-700 font-mono text-sm font-semibold bg-neutral-50 px-3 py-1 rounded-lg border border-neutral-200">
+          <div className="flex items-center gap-1.5 text-neutral-700 font-mono text-sm font-semibold bg-neutral-50 px-3 py-1.5 rounded-xl border border-neutral-200">
             <Clock className="w-4 h-4 text-[#F26207]" />
             <span>
               {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}

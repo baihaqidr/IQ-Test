@@ -72,12 +72,16 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
         <div className="flex items-center gap-2">
           <div className="w-4 h-4">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
-              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
-              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              <path
+                d="M24 9.5C22 7.3 19.1 6 16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C19.1 26 22 24.7 24 22.5"
+                stroke="#F26207"
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+              <circle cx="16" cy="16" r="3" fill="#FFFFFF" />
             </svg>
           </div>
-          <span>cognitive™ Intelligence Dossier #2026</span>
+          <span>cognitive Intelligence Dossier #2026</span>
         </div>
         <div className="hidden sm:flex items-center gap-1 bg-white/10 px-3 py-0.5 rounded-full text-xs font-mono text-orange-200">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> ID: {licenseId || 'COG-ID-992140'}
@@ -137,7 +141,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
             <h3 className="text-base sm:text-lg font-black text-[#0B1419]">
               Distribusi Normal IQ (Kurva Gauss)
             </h3>
-            <p className="text-xs text-neutral-500 font-mono">Standar Deviasi 15 • cognitive™ Norm Database</p>
+            <p className="text-xs text-neutral-500 font-mono">Standar Deviasi 15 • cognitive Norm Database</p>
           </div>
           <span className="text-xs font-bold text-[#F26207] bg-orange-50 px-2.5 py-1 rounded-md border border-orange-200 font-mono">
             WAIS-IV Normed
@@ -190,7 +194,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
         <h3 className="text-base sm:text-lg font-black text-[#0B1419] mb-1">
           Analisis 4 Dimensi Kecerdasan Kognitif
         </h3>
-        <p className="text-xs text-neutral-500 mb-6 font-mono">cognitive™ Psychometric Assessment</p>
+        <p className="text-xs text-neutral-500 mb-6 font-mono">cognitive Psychometric Assessment</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
@@ -242,7 +246,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
             <h3 className="text-base sm:text-lg font-black text-[#0B1419]">
               Pratinjau Sertifikat Eksekutif
             </h3>
-            <p className="text-xs text-neutral-500 font-mono">Sertifikat terakreditasi cognitive™ Authority</p>
+            <p className="text-xs text-neutral-500 font-mono">Sertifikat terakreditasi cognitive Authority</p>
           </div>
           <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 font-mono">
             PDF 300 DPI Ready
@@ -254,7 +258,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
           <div className="relative z-10">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#F26207] mb-1 font-mono">
               <Sparkles className="w-4 h-4" />
-              cognitive™ Cognitive Psychometrics
+              cognitive Cognitive Psychometrics
             </div>
             <h4 className="text-xl sm:text-2xl font-serif font-black text-white tracking-wide mt-1">
               EXECUTIVE CERTIFICATE OF COGNITIVE EXCELLENCE

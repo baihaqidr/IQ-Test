@@ -44,13 +44,17 @@ export default function CalculatingLoader({ onComplete }) {
 
   return (
     <div className="max-w-md mx-auto px-4 py-12 sm:py-16 text-center">
-      {/* cognitive Geometric C Logo Animated */}
+      {/* Option 2 Logo: Neural Aperture C Animated */}
       <div className="w-16 h-16 rounded-2xl bg-white border border-neutral-200 shadow-sm flex items-center justify-center mx-auto mb-6 relative">
-        <div className="w-9 h-9">
+        <div className="w-10 h-10">
           <svg viewBox="0 0 32 32" fill="none" className="w-full h-full animate-pulse">
-            <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
-            <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
-            <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+            <path
+              d="M24 9.5C22 7.3 19.1 6 16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C19.1 26 22 24.7 24 22.5"
+              stroke="#F26207"
+              strokeWidth="5"
+              strokeLinecap="round"
+            />
+            <circle cx="16" cy="16" r="3" fill="#0B1419" />
           </svg>
         </div>
       </div>
@@ -59,7 +63,7 @@ export default function CalculatingLoader({ onComplete }) {
         Menganalisis Profil Kognitif
       </h2>
       <p className="text-xs text-neutral-500 mt-1 font-mono">
-        cognitive™ Psychometric Engine v4.2
+        cognitive Psychometric Engine v4.2
       </p>
 
       {/* Progress Counter & Bar */}

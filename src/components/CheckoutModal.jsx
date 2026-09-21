@@ -35,7 +35,7 @@ export default function CheckoutModal({ isOpen, onClose, user, score, licenseId,
         {!isPaid ? (
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#F26207] uppercase tracking-wider mb-2 font-mono">
-              <Lock className="w-3.5 h-3.5" /> Replit Secure Checkout
+              <Lock className="w-3.5 h-3.5" /> cognitive™ Secure Checkout
             </div>
             <h3 className="text-xl font-black text-[#0B1419]">
               Selesaikan Pembayaran
@@ -162,7 +162,7 @@ export default function CheckoutModal({ isOpen, onClose, user, score, licenseId,
             <div className="my-6 p-4 bg-neutral-50 rounded-xl border border-neutral-200 text-left font-mono text-xs">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-neutral-500">Nomor Lisensi:</span>
-                <span className="font-bold text-[#0B1419]">{licenseId || 'REPL-ID-992140'}</span>
+                <span className="font-bold text-[#0B1419]">{licenseId || 'COG-ID-992140'}</span>
               </div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-neutral-500">Skor Terverifikasi:</span>
@@ -175,7 +175,7 @@ export default function CheckoutModal({ isOpen, onClose, user, score, licenseId,
             </div>
 
             <button
-              onClick={() => alert(`Mengunduh Sertifikat Replit_IQ_${user.name.replace(/\s+/g, '_')}.pdf...`)}
+              onClick={() => alert(`Mengunduh Sertifikat cognitive_IQ_${user.name.replace(/\s+/g, '_')}.pdf...`)}
               className="w-full py-4 rounded-xl font-bold text-sm bg-[#0B1419] hover:bg-[#F26207] text-white shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all"
             >
               <Download className="w-4 h-4" />

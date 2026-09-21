@@ -20,14 +20,14 @@ export default async function handler(req, res) {
 
   const brevoApiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.SENDER_EMAIL || 'baihaqidr@gmail.com';
-  const senderName = process.env.SENDER_NAME || 'Replit Intelligence Official';
+  const senderName = process.env.SENDER_NAME || 'cognitive Official';
 
   if (!brevoApiKey) {
     console.error('BREVO_API_KEY is missing in Vercel Environment Variables');
     return res.status(500).json({ error: 'BREVO_API_KEY belum dikonfigurasi di Environment Variables Vercel.' });
   }
 
-  // Template Email HTML Resmi Berdesain Replit Intelligence Executive Dossier
+  // Template Email HTML Resmi Berdesain cognitive™ Executive Dossier
   const emailHtml = `
     <!DOCTYPE html>
     <html lang="id">
@@ -57,14 +57,14 @@ export default async function handler(req, res) {
     <body>
       <div class="container">
         <div class="header">
-          <div class="logo-text">replit<span class="logo-accent">.intelligence</span></div>
+          <div class="logo-text">cognitive<span class="logo-accent">.co</span></div>
           <p>Standardized WAIS-IV Cognitive Assessment</p>
         </div>
         
         <div class="content">
           <p style="font-size: 15px;">Halo <strong>${name}</strong>,</p>
           <p style="color: #64748b; line-height: 1.6; font-size: 13px;">
-            Hasil evaluasi kognitif penalaran matriks dan profil arketipe pemikiran Anda telah selesai diproses secara resmi oleh Replit Intelligence Psychometric Engine.
+            Hasil evaluasi kognitif penalaran matriks dan profil arketipe pemikiran Anda telah selesai diproses secara resmi oleh cognitive™ Psychometric Engine.
           </p>
           
           <div class="archetype-box">
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
             </tr>
             <tr>
               <td style="color: #64748b;">Nomor Lisensi ID</td>
-              <td style="color: #f26207;">${licenseId || 'REPL-ID-992140'}</td>
+              <td style="color: #f26207;">${licenseId || 'COG-ID-992140'}</td>
             </tr>
             <tr>
               <td style="color: #64748b;">Standar Psikometrik</td>
@@ -107,7 +107,7 @@ export default async function handler(req, res) {
         </div>
 
         <div class="footer">
-          <p>© 2026 Replit Intelligence. All Rights Reserved.<br>
+          <p>© 2026 cognitive™. All Rights Reserved.<br>
           Email ini dikirimkan secara otomatis ke ${email}.</p>
         </div>
       </div>
@@ -126,7 +126,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         sender: { name: senderName, email: senderEmail },
         to: [{ email: email.trim(), name: name.trim() }],
-        subject: `[Replit Intelligence] Laporan Profil Kognitif & Sertifikat IQ: Skor ${score} - ${name}`,
+        subject: `[cognitive] Laporan Profil Kognitif & Sertifikat IQ: Skor ${score} - ${name}`,
         htmlContent: emailHtml,
       }),
     });

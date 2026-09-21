@@ -18,23 +18,26 @@ export default function Header({ currentStep, totalSteps, isQuizActive }) {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-neutral-200/80 transition-all">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Replit Official Logo & Wordmark */}
+        {/* Brand: cognitive with Geometric C Monogram */}
         <div className="flex items-center gap-2.5">
-          {/* Replit Official 3-Block SVG Icon */}
+          {/* Modular Geometric "C" Logo SVG */}
           <div className="w-7 h-7 shrink-0 flex items-center justify-center">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              <path d="M7 6C7 4.89543 7.89543 4 9 4H19C20.1046 4 21 4.89543 21 6V11C21 12.1046 20.1046 13 19 13H9C7.89543 13 7 12.1046 7 11V6Z" fill="#F26207"/>
-              <path d="M13 13C13 11.8954 13.8954 11 15 11H25C26.1046 11 27 11.8954 27 13V18C27 19.1046 26.1046 20 25 20H15C13.8954 20 13 19.1046 13 18V13Z" fill="#F26207"/>
-              <path d="M7 20C7 18.8954 7.89543 18 9 18H19C20.1046 18 21 18.8954 21 20V25C21 26.1046 20.1046 27 19 27H9C7.89543 27 7 26.1046 7 25V20Z" fill="#F26207"/>
+              {/* Top Bar of C */}
+              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              {/* Left Pillar of C */}
+              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
+              {/* Bottom Bar of C */}
+              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
             </svg>
           </div>
           
           <div className="flex items-baseline gap-1.5">
             <span className="font-black text-xl text-[#0B1419] tracking-tight font-sans">
-              replit
+              cognitive
             </span>
             <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">
-              intelligence™
+              assessment™
             </span>
           </div>
         </div>

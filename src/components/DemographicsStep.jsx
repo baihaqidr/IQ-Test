@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Users, Shield, Award, ArrowRight, Brain } from 'lucide-react';
+import { User, Users, Shield, Award, ArrowRight } from 'lucide-react';
 
 const ageGroups = [
   { label: 'Di bawah 18 tahun', value: '<18' },
@@ -27,12 +27,12 @@ export default function DemographicsStep({ onStart }) {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-[#0B1419] text-xs font-semibold mb-4 font-mono">
           <div className="w-3.5 h-3.5 flex items-center justify-center shrink-0">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              <path d="M7 6C7 4.89543 7.89543 4 9 4H19C20.1046 4 21 4.89543 21 6V11C21 12.1046 20.1046 13 19 13H9C7.89543 13 7 12.1046 7 11V6Z" fill="#F26207"/>
-              <path d="M13 13C13 11.8954 13.8954 11 15 11H25C26.1046 11 27 11.8954 27 13V18C27 19.1046 26.1046 20 25 20H15C13.8954 20 13 19.1046 13 18V13Z" fill="#F26207"/>
-              <path d="M7 20C7 18.8954 7.89543 18 9 18H19C20.1046 18 21 18.8954 21 20V25C21 26.1046 20.1046 27 19 27H9C7.89543 27 7 26.1046 7 25V20Z" fill="#F26207"/>
+              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
+              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
             </svg>
           </div>
-          <span>Replit Intelligence • WAIS-IV Standard</span>
+          <span>cognitive™ • WAIS-IV Standard</span>
         </div>
         
         <h1 className="text-3xl sm:text-4xl font-black text-[#0B1419] tracking-tight leading-tight">

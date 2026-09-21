@@ -72,15 +72,15 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
         <div className="flex items-center gap-2">
           <div className="w-4 h-4">
             <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-              <path d="M7 6C7 4.89543 7.89543 4 9 4H19C20.1046 4 21 4.89543 21 6V11C21 12.1046 20.1046 13 19 13H9C7.89543 13 7 12.1046 7 11V6Z" fill="#F26207"/>
-              <path d="M13 13C13 11.8954 13.8954 11 15 11H25C26.1046 11 27 11.8954 27 13V18C27 19.1046 26.1046 20 25 20H15C13.8954 20 13 19.1046 13 18V13Z" fill="#F26207"/>
-              <path d="M7 20C7 18.8954 7.89543 18 9 18H19C20.1046 18 21 18.8954 21 20V25C21 26.1046 20.1046 27 19 27H9C7.89543 27 7 26.1046 7 25V20Z" fill="#F26207"/>
+              <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+              <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
+              <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
             </svg>
           </div>
-          <span>Replit Intelligence Cognitive Dossier #2026</span>
+          <span>cognitive™ Intelligence Dossier #2026</span>
         </div>
         <div className="hidden sm:flex items-center gap-1 bg-white/10 px-3 py-0.5 rounded-full text-xs font-mono text-orange-200">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> ID: {licenseId || 'REPL-ID-992140'}
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> ID: {licenseId || 'COG-ID-992140'}
         </div>
       </div>
 
@@ -137,7 +137,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
             <h3 className="text-base sm:text-lg font-black text-[#0B1419]">
               Distribusi Normal IQ (Kurva Gauss)
             </h3>
-            <p className="text-xs text-neutral-500 font-mono">Standar Deviasi 15 • Replit Norm Database</p>
+            <p className="text-xs text-neutral-500 font-mono">Standar Deviasi 15 • cognitive™ Norm Database</p>
           </div>
           <span className="text-xs font-bold text-[#F26207] bg-orange-50 px-2.5 py-1 rounded-md border border-orange-200 font-mono">
             WAIS-IV Normed
@@ -148,14 +148,14 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
         <div className="relative w-full aspect-[2.4/1] bg-neutral-50 rounded-xl p-4 border border-neutral-200 flex flex-col justify-end">
           <svg viewBox="0 0 500 200" className="w-full h-full overflow-visible">
             <defs>
-              <linearGradient id="replitBellGrad" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="cogBellGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#F26207" stopOpacity="0.35" />
                 <stop offset="100%" stopColor="#F26207" stopOpacity="0.02" />
               </linearGradient>
             </defs>
             <path
               d="M 20 180 Q 150 180 200 90 Q 250 10 300 90 Q 350 180 480 180 L 480 180 L 20 180 Z"
-              fill="url(#replitBellGrad)"
+              fill="url(#cogBellGrad)"
             />
             <path
               d="M 20 180 Q 150 180 200 90 Q 250 10 300 90 Q 350 180 480 180"
@@ -190,7 +190,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
         <h3 className="text-base sm:text-lg font-black text-[#0B1419] mb-1">
           Analisis 4 Dimensi Kecerdasan Kognitif
         </h3>
-        <p className="text-xs text-neutral-500 mb-6 font-mono">Replit Neural Psychometric Assessment</p>
+        <p className="text-xs text-neutral-500 mb-6 font-mono">cognitive™ Psychometric Assessment</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
@@ -242,7 +242,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
             <h3 className="text-base sm:text-lg font-black text-[#0B1419]">
               Pratinjau Sertifikat Eksekutif
             </h3>
-            <p className="text-xs text-neutral-500 font-mono">Sertifikat terakreditasi Replit Intelligence</p>
+            <p className="text-xs text-neutral-500 font-mono">Sertifikat terakreditasi cognitive™ Authority</p>
           </div>
           <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 font-mono">
             PDF 300 DPI Ready
@@ -254,7 +254,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
           <div className="relative z-10">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#F26207] mb-1 font-mono">
               <Sparkles className="w-4 h-4" />
-              Replit Intelligence Psychometrics
+              cognitive™ Cognitive Psychometrics
             </div>
             <h4 className="text-xl sm:text-2xl font-serif font-black text-white tracking-wide mt-1">
               EXECUTIVE CERTIFICATE OF COGNITIVE EXCELLENCE
@@ -277,7 +277,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
 
             <div className="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-[10px] text-neutral-400 font-mono">
               <div className="text-left">
-                <p className="font-bold text-white">Lisensi ID: {licenseId || 'REPL-ID-992140'}</p>
+                <p className="font-bold text-white">Lisensi ID: {licenseId || 'COG-ID-992140'}</p>
                 <p>Verifikasi: https://tes-iq-indonesia.vercel.app/verify</p>
               </div>
               <div className="w-12 h-12 bg-white p-1 rounded-lg shadow-xs flex items-center justify-center">

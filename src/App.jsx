@@ -45,7 +45,7 @@ export default function App() {
       // Finished all questions, calculate score & generate unique license
       const correctCount = Object.values(updatedAnswers).filter(a => a?.isCorrect).length;
       const finalIQ = Math.min(144, Math.max(90, Math.round(92 + (correctCount / questions.length) * 48)));
-      const genLicense = `REPL-ID-${Math.floor(100000 + Math.random() * 900000)}`;
+      const genLicense = `COG-ID-${Math.floor(100000 + Math.random() * 900000)}`;
       
       setCalculatedScore(finalIQ);
       setLicenseId(genLicense);
@@ -184,12 +184,12 @@ export default function App() {
           <div className="flex items-center gap-2">
             <div className="w-4 h-4">
               <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-                <path d="M7 6C7 4.89543 7.89543 4 9 4H19C20.1046 4 21 4.89543 21 6V11C21 12.1046 20.1046 13 19 13H9C7.89543 13 7 12.1046 7 11V6Z" fill="#F26207"/>
-                <path d="M13 13C13 11.8954 13.8954 11 15 11H25C26.1046 11 27 11.8954 27 13V18C27 19.1046 26.1046 20 25 20H15C13.8954 20 13 19.1046 13 18V13Z" fill="#F26207"/>
-                <path d="M7 20C7 18.8954 7.89543 18 9 18H19C20.1046 18 21 18.8954 21 20V25C21 26.1046 20.1046 27 19 27H9C7.89543 27 7 26.1046 7 25V20Z" fill="#F26207"/>
+                <rect x="6" y="5" width="20" height="6.5" rx="3.25" fill="#F26207" />
+                <rect x="6" y="5" width="6.5" height="22" rx="3.25" fill="#F26207" />
+                <rect x="6" y="20.5" width="20" height="6.5" rx="3.25" fill="#F26207" />
               </svg>
             </div>
-            <p>© 2026 Replit Intelligence Lab. All Rights Reserved.</p>
+            <p>© 2026 cognitive™ Lab. All Rights Reserved.</p>
           </div>
           <div className="flex items-center gap-4 text-[11px] text-neutral-500">
             <span className="hover:text-neutral-800 cursor-pointer">Privacy</span>

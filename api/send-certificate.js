@@ -1,8 +1,4 @@
-import { Resend } from 'resend';
-
-// Vercel Serverless Function Handler
 export default async function handler(req, res) {
-  // Hanya menerima metode POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -13,9 +9,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Nama dan Email wajib diisi' });
   }
 
+  const brevoApiKey = process.env.BREVO_API_KEY;
   const resendApiKey = process.env.RESEND_API_KEY;
 
-  // Template Email HTML Resmi
+  // Template Email HTML Resmi Berdesain Sertifikat Premium
   const emailHtml = `
     <!DOCTYPE html>
     <html lang="id">
@@ -53,7 +50,7 @@ export default async function handler(req, res) {
           <div class="score-card">
             <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Skor Terverifikasi Anda</span>
             <div class="score-num">${score} <span style="font-size: 18px; color: #94a3b8;">/ 145</span></div>
-            <div class="badge">${classification || 'Sangat Unggul / High IQ'}</div>
+            <div class="badge">${classification || 'Sangat Unggul / Superior Intelligence'}</div>
           </div>
 
           <table class="details-table">
@@ -78,7 +75,7 @@ export default async function handler(req, res) {
           <div class="certificate-box">
             <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1e293b;">Unduh Sertifikat Digital & Laporan Lengkap</h3>
             <p style="margin: 0; font-size: 12px; color: #64748b;">Sertifikat resolusi tinggi (PDF 300 DPI) siap dicetak dengan lisensi resmi.</p>
-            <a href="https://id.wwiqtest.com" class="btn">Unduh Sertifikat PDF</a>
+            <a href="https://tes-iq-indonesia.vercel.app" class="btn">Unduh Sertifikat PDF</a>
           </div>
 
           <p style="font-size: 12px; color: #64748b; line-height: 1.6;">
@@ -96,10 +93,44 @@ export default async function handler(req, res) {
   `;
 
   try {
-    // Jika Resend API Key tersedia di Environment Variables
+    // 1. Prioritas Utama: Brevo API (Bisa kirim ke SEMUA alamat email publik)
+    if (brevoApiKey) {
+      const senderEmail = process.env.SENDER_EMAIL || 'baihaqidr@gmail.com';
+      const senderName = process.env.SENDER_NAME || 'Tes IQ Resmi Indonesia';
+
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'api-key': brevoApiKey,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          sender: { name: senderName, email: senderEmail },
+          to: [{ email: email, name: name }],
+          subject: `[Sertifikat Resmi] Hasil Tes IQ Anda: Skor ${score} - ${name}`,
+          htmlContent: emailHtml,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Gagal mengirim email via Brevo');
+      }
+
+      return res.status(200).json({
+        success: true,
+        provider: 'brevo',
+        message: 'Email sertifikat berhasil dikirim ke penerima!',
+        data,
+      });
+    }
+
+    // 2. Fallback: Resend API (Jika Resend Key tersedia)
     if (resendApiKey) {
+      const { Resend } = await import('resend');
       const resend = new Resend(resendApiKey);
-      const fromEmail = process.env.EMAIL_FROM || 'Worldwide IQ Test <noreply@resend.dev>';
+      const fromEmail = process.env.EMAIL_FROM || 'Worldwide IQ Test <onboarding@resend.dev>';
 
       const data = await resend.emails.send({
         from: fromEmail,
@@ -110,18 +141,18 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
+        provider: 'resend',
         message: 'Email sertifikat berhasil dikirim melalui Resend!',
         data,
       });
-    } else {
-      // Mode simulasi/fallback jika API key belum diisi di dashboard Vercel
-      console.log(`[Email Simulation] Mengirim email ke ${email} untuk ${name} (Skor IQ: ${score})`);
-      return res.status(200).json({
-        success: true,
-        simulated: true,
-        message: 'Simulasi pengiriman berhasil. Pasang RESEND_API_KEY di Vercel untuk pengiriman nyata.',
-      });
     }
+
+    // 3. Fallback Simulasi
+    return res.status(200).json({
+      success: true,
+      simulated: true,
+      message: 'Simulasi pengiriman berhasil.',
+    });
   } catch (error) {
     console.error('Error sending email:', error);
     return res.status(500).json({ error: error.message || 'Gagal mengirim email' });

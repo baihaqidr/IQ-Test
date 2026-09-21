@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, Clock, CheckCircle2, Sparkles } from 'lucide-react';
+import { Clock } from 'lucide-react';
 
 export default function Header({ currentStep, totalSteps, isQuizActive }) {
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
@@ -14,56 +14,41 @@ export default function Header({ currentStep, totalSteps, isQuizActive }) {
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-  const progressPercent = Math.min(100, Math.round((currentStep / totalSteps) * 100));
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-xs transition-all">
-      <div className="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
-        {/* Brand Logo: personality.co */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-xs">
-            <span className="font-black text-sm tracking-tighter bg-gradient-to-tr from-indigo-400 to-violet-300 bg-clip-text text-transparent">P</span>
+    <header className="sticky top-0 z-40 bg-white border-b border-neutral-200/80 transition-all">
+      <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Replit Official Logo & Wordmark */}
+        <div className="flex items-center gap-2.5">
+          {/* Replit Official 3-Block SVG Icon */}
+          <div className="w-7 h-7 shrink-0 flex items-center justify-center">
+            <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
+              <path d="M7 6C7 4.89543 7.89543 4 9 4H19C20.1046 4 21 4.89543 21 6V11C21 12.1046 20.1046 13 19 13H9C7.89543 13 7 12.1046 7 11V6Z" fill="#F26207"/>
+              <path d="M13 13C13 11.8954 13.8954 11 15 11H25C26.1046 11 27 11.8954 27 13V18C27 19.1046 26.1046 20 25 20H15C13.8954 20 13 19.1046 13 18V13Z" fill="#F26207"/>
+              <path d="M7 20C7 18.8954 7.89543 18 9 18H19C20.1046 18 21 18.8954 21 20V25C21 26.1046 20.1046 27 19 27H9C7.89543 27 7 26.1046 7 25V20Z" fill="#F26207"/>
+            </svg>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-slate-950 tracking-tight text-lg">
-                personality<span className="text-indigo-600">.co</span>
-              </span>
-              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full border border-indigo-100">
-                <Sparkles className="w-3 h-3 text-indigo-600" /> Cognitive IQ Test
-              </span>
-            </div>
-            <p className="text-[10px] text-slate-400 hidden sm:block font-medium">Standardized Psychometric Matrix Assessment</p>
+          
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-black text-xl text-[#0B1419] tracking-tight font-sans">
+              replit
+            </span>
+            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">
+              intelligence™
+            </span>
           </div>
         </div>
 
-        {/* Right side: Timer & Badges */}
-        <div className="flex items-center gap-3">
-          {isQuizActive && (
-            <div className="flex items-center gap-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-full font-mono font-medium text-xs shadow-xs">
-              <Clock className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
-              <span>
-                {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-              </span>
-            </div>
-          )}
-
-          <div className="hidden md:flex items-center gap-1 text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200/60">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="font-medium text-[11px]">WAIS-IV Normed</span>
+        {/* Right side: Clean Minimalist Timer */}
+        {isQuizActive && (
+          <div className="flex items-center gap-1.5 text-neutral-700 font-mono text-sm font-semibold bg-neutral-50 px-3 py-1 rounded-lg border border-neutral-200">
+            <Clock className="w-4 h-4 text-[#F26207]" />
+            <span>
+              {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+            </span>
           </div>
-        </div>
+        )}
       </div>
-
-      {/* Progress Bar (Visible during quiz) */}
-      {isQuizActive && (
-        <div className="w-full bg-slate-100 h-1 overflow-hidden">
-          <div
-            className="bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-600 h-full transition-all duration-300 ease-out"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-      )}
     </header>
   );
 }

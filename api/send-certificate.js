@@ -98,7 +98,7 @@ export default async function handler(req, res) {
           </table>
 
           <div style="text-align: center; margin: 26px 0;">
-            <a href="https://tes-iq-indonesia.vercel.app" class="btn">Buka Sertifikat & Dossier Lengkap</a>
+            <a href="https://cognitive-official.vercel.app" class="btn">Buka Sertifikat & Dossier Lengkap</a>
           </div>
 
           <p style="font-size: 12px; color: #94a3b8; line-height: 1.6;">

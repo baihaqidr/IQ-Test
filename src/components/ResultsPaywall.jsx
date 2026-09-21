@@ -282,7 +282,7 @@ export default function ResultsPaywall({ user, score, licenseId, onOpenCheckout 
             <div className="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-[10px] text-neutral-400 font-mono">
               <div className="text-left">
                 <p className="font-bold text-white">Lisensi ID: {licenseId || 'COG-ID-992140'}</p>
-                <p>Verifikasi: https://tes-iq-indonesia.vercel.app/verify</p>
+                <p>Verifikasi: https://cognitive-official.vercel.app/verify</p>
               </div>
               <div className="w-12 h-12 bg-white p-1 rounded-lg shadow-xs flex items-center justify-center">
                 <QrCode className="w-10 h-10 text-[#0B1419]" />

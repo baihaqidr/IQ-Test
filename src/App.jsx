@@ -1,0 +1,173 @@
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import DemographicsStep from './components/DemographicsStep';
+import QuizStep from './components/QuizStep';
+import CalculatingLoader from './components/CalculatingLoader';
+import LeadCaptureStep from './components/LeadCaptureStep';
+import ResultsPaywall from './components/ResultsPaywall';
+import CheckoutModal from './components/CheckoutModal';
+import { questions } from './data/questions';
+import { saveQuizResultToSupabase, updatePaymentStatus } from './lib/supabase';
+
+export default function App() {
+  const [step, setStep] = useState('demographics'); // demographics | quiz | calculating | lead_capture | results
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [userAnswers, setUserAnswers] = useState({});
+  const [demographics, setDemographics] = useState({ gender: null, ageGroup: null });
+  const [userData, setUserData] = useState({ name: '', email: '' });
+  const [licenseId, setLicenseId] = useState('');
+  const [calculatedScore, setCalculatedScore] = useState(128);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [utmParams, setUtmParams] = useState({});
+
+  // Capture UTM parameters from URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const utm = {};
+    for (const [key, value] of params.entries()) {
+      utm[key] = value;
+    }
+    setUtmParams(utm);
+  }, []);
+
+  const handleStartQuiz = (demoData) => {
+    setDemographics(demoData);
+    setStep('quiz');
+    setQuestionIndex(0);
+  };
+
+  const handleAnswerQuestion = (qId, option) => {
+    const updatedAnswers = { ...userAnswers, [qId]: option };
+    setUserAnswers(updatedAnswers);
+
+    if (questionIndex + 1 < questions.length) {
+      setQuestionIndex(questionIndex + 1);
+    } else {
+      // Finished all questions, calculate score & generate unique license
+      const correctCount = Object.values(updatedAnswers).filter(a => a?.isCorrect).length;
+      const finalIQ = Math.min(144, Math.max(90, Math.round(92 + (correctCount / questions.length) * 48)));
+      const genLicense = `WWIQ-ID-${Math.floor(100000 + Math.random() * 900000)}`;
+      
+      setCalculatedScore(finalIQ);
+      setLicenseId(genLicense);
+      setStep('calculating');
+    }
+  };
+
+  const handleSkipQuestion = () => {
+    handleAnswerQuestion(questions[questionIndex].id, { id: 'SKIPPED', isCorrect: false });
+  };
+
+  const handleCalculationComplete = () => {
+    setStep('lead_capture');
+  };
+
+  const handleLeadSubmit = async (lead) => {
+    setUserData(lead);
+    setStep('results');
+
+    // 1. Simpan Lead & Data ke Supabase
+    await saveQuizResultToSupabase({
+      name: lead.name,
+      email: lead.email,
+      gender: demographics.gender,
+      ageGroup: demographics.ageGroup,
+      score: calculatedScore,
+      licenseId: licenseId,
+      answers: userAnswers,
+      utmParams: utmParams,
+      status: 'completed'
+    });
+
+    // 2. Trigger kirim email via Serverless API
+    try {
+      await fetch('/api/send-certificate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: lead.name,
+          email: lead.email,
+          score: calculatedScore,
+          licenseId: licenseId,
+          classification: calculatedScore >= 120 ? 'Unggul / Superior Intelligence' : 'Rata-rata Normal'
+        })
+      });
+    } catch (e) {
+      console.warn('API send-certificate call failed (expected on local vite dev server without vercel dev):', e);
+    }
+  };
+
+  const handlePaymentSuccess = async () => {
+    // Update status di Supabase ke 'paid'
+    await updatePaymentStatus(licenseId);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+      {/* Sticky Official Header */}
+      <Header
+        currentStep={questionIndex + 1}
+        totalSteps={questions.length}
+        isQuizActive={step === 'quiz'}
+      />
+
+      {/* Main Content Viewport */}
+      <main className="flex-1">
+        {step === 'demographics' && (
+          <DemographicsStep onStart={handleStartQuiz} />
+        )}
+
+        {step === 'quiz' && (
+          <QuizStep
+            question={questions[questionIndex]}
+            questionIndex={questionIndex}
+            totalQuestions={questions.length}
+            onAnswer={handleAnswerQuestion}
+            onSkip={handleSkipQuestion}
+          />
+        )}
+
+        {step === 'calculating' && (
+          <CalculatingLoader onComplete={handleCalculationComplete} />
+        )}
+
+        {step === 'lead_capture' && (
+          <LeadCaptureStep onSubmit={handleLeadSubmit} />
+        )}
+
+        {step === 'results' && (
+          <ResultsPaywall
+            user={{ ...demographics, ...userData }}
+            score={calculatedScore}
+            licenseId={licenseId}
+            onOpenCheckout={() => setIsCheckoutOpen(true)}
+          />
+        )}
+      </main>
+
+      {/* Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        user={userData}
+        score={calculatedScore}
+        licenseId={licenseId}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400 mt-auto">
+        <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p>© 2026 Worldwide IQ Test Authority. Seluruh Hak Cipta Dilindungi.</p>
+          <div className="flex items-center gap-4 text-[11px] text-slate-500">
+            <span className="hover:text-slate-800 cursor-pointer">Kebijakan Privasi</span>
+            <span>•</span>
+            <span className="hover:text-slate-800 cursor-pointer">Syarat & Ketentuan</span>
+            <span>•</span>
+            <span className="hover:text-slate-800 cursor-pointer">Standar Kalibrasi</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

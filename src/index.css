@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  }
+  .shadow-card {
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+  }
+  .shadow-glow {
+    box-shadow: 0 0 25px -5px rgba(2, 132, 199, 0.35);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+/* Custom matrix SVG box styling */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+}
+
+.matrix-cell {
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border: 1.5px solid #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.option-cell {
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.option-cell:hover {
+  border-color: #0284c7;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px rgba(2, 132, 199, 0.15);
+}
+
+.option-cell:active {
+  transform: scale(0.97);
+}

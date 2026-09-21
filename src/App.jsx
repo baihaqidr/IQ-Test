@@ -45,7 +45,7 @@ export default function App() {
       // Finished all questions, calculate score & generate unique license
       const correctCount = Object.values(updatedAnswers).filter(a => a?.isCorrect).length;
       const finalIQ = Math.min(144, Math.max(90, Math.round(92 + (correctCount / questions.length) * 48)));
-      const genLicense = `WWIQ-ID-${Math.floor(100000 + Math.random() * 900000)}`;
+      const genLicense = `PCO-ID-${Math.floor(100000 + Math.random() * 900000)}`;
       
       setCalculatedScore(finalIQ);
       setLicenseId(genLicense);
@@ -181,13 +181,13 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400 mt-auto">
         <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>© 2026 Worldwide IQ Test Authority. Seluruh Hak Cipta Dilindungi.</p>
+          <p>© 2026 Personality.co Psychometric Lab. Seluruh Hak Cipta Dilindungi.</p>
           <div className="flex items-center gap-4 text-[11px] text-slate-500">
             <span className="hover:text-slate-800 cursor-pointer">Kebijakan Privasi</span>
             <span>•</span>
             <span className="hover:text-slate-800 cursor-pointer">Syarat & Ketentuan</span>
             <span>•</span>
-            <span className="hover:text-slate-800 cursor-pointer">Standar Kalibrasi</span>
+            <span className="hover:text-slate-800 cursor-pointer">Standar Kalibrasi WAIS-IV</span>
           </div>
         </div>
       </footer>

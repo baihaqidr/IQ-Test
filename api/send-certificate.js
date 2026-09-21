@@ -1,4 +1,13 @@
 export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -10,9 +19,14 @@ export default async function handler(req, res) {
   }
 
   const brevoApiKey = process.env.BREVO_API_KEY;
-  const resendApiKey = process.env.RESEND_API_KEY;
+  const senderEmail = process.env.SENDER_EMAIL || 'baihaqidr@gmail.com';
+  const senderName = process.env.SENDER_NAME || 'Tes IQ Resmi Indonesia';
 
-  // Template Email HTML Resmi Berdesain Sertifikat Premium
+  if (!brevoApiKey) {
+    console.error('BREVO_API_KEY is missing in Vercel Environment Variables');
+    return res.status(500).json({ error: 'BREVO_API_KEY belum dikonfigurasi di Environment Variables Vercel.' });
+  }
+
   const emailHtml = `
     <!DOCTYPE html>
     <html lang="id">
@@ -93,65 +107,31 @@ export default async function handler(req, res) {
   `;
 
   try {
-    // 1. Prioritas Utama: Brevo API (Bisa kirim ke SEMUA alamat email publik)
-    if (brevoApiKey) {
-      const senderEmail = process.env.SENDER_EMAIL || 'baihaqidr@gmail.com';
-      const senderName = process.env.SENDER_NAME || 'Tes IQ Resmi Indonesia';
-
-      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-          'accept': 'application/json',
-          'api-key': brevoApiKey,
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          sender: { name: senderName, email: senderEmail },
-          to: [{ email: email, name: name }],
-          subject: `[Sertifikat Resmi] Hasil Tes IQ Anda: Skor ${score} - ${name}`,
-          htmlContent: emailHtml,
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || 'Gagal mengirim email via Brevo');
-      }
-
-      return res.status(200).json({
-        success: true,
-        provider: 'brevo',
-        message: 'Email sertifikat berhasil dikirim ke penerima!',
-        data,
-      });
-    }
-
-    // 2. Fallback: Resend API (Jika Resend Key tersedia)
-    if (resendApiKey) {
-      const { Resend } = await import('resend');
-      const resend = new Resend(resendApiKey);
-      const fromEmail = process.env.EMAIL_FROM || 'Worldwide IQ Test <onboarding@resend.dev>';
-
-      const data = await resend.emails.send({
-        from: fromEmail,
-        to: [email],
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': brevoApiKey,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: senderName, email: senderEmail },
+        to: [{ email: email.trim(), name: name.trim() }],
         subject: `[Sertifikat Resmi] Hasil Tes IQ Anda: Skor ${score} - ${name}`,
-        html: emailHtml,
-      });
+        htmlContent: emailHtml,
+      }),
+    });
 
-      return res.status(200).json({
-        success: true,
-        provider: 'resend',
-        message: 'Email sertifikat berhasil dikirim melalui Resend!',
-        data,
-      });
+    const data = await response.json();
+    if (!response.ok) {
+      console.error('Brevo API Error:', data);
+      return res.status(response.status).json({ error: data.message || 'Brevo API Error', details: data });
     }
 
-    // 3. Fallback Simulasi
     return res.status(200).json({
       success: true,
-      simulated: true,
-      message: 'Simulasi pengiriman berhasil.',
+      message: 'Email sertifikat berhasil dikirim ke penerima!',
+      data,
     });
   } catch (error) {
     console.error('Error sending email:', error);

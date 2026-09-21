@@ -15,7 +15,7 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
   const progressPercent = Math.round(((questionIndex) / totalQuestions) * 100);
 
   return (
-    <div className="max-w-xl mx-auto px-3 sm:px-4 py-4 sm:py-8 animate-in fade-in duration-150">
+    <div className="max-w-xl mx-auto px-3 sm:px-4 py-4 sm:py-6 animate-in fade-in duration-150">
       {/* Top Progress Stats */}
       <div className="mb-2">
         <div className="flex items-center justify-between text-xs text-neutral-500 font-mono mb-1.5 px-0.5 font-bold">
@@ -32,10 +32,10 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
       </div>
 
       {/* Main Test Card */}
-      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-neutral-200/90 shadow-sm mt-3">
-        {/* 3x3 Matrix Grid Container - Direct Square Cells (No inner circle wrapper) */}
-        <div className="max-w-[320px] sm:max-w-[360px] mx-auto mb-6">
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-neutral-200/90 shadow-sm mt-3">
+        {/* 3x3 Matrix Grid Container */}
+        <div className="max-w-[300px] sm:max-w-[340px] mx-auto mb-5">
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
             {question.grid.map((cell, idx) => (
               <div
                 key={cell.id || idx}
@@ -43,13 +43,13 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
               >
                 {cell.isTarget ? (
                   /* Solid Target Box with Question Mark */
-                  <div className="w-full h-full rounded-2xl bg-[#10b981] text-white flex items-center justify-center shadow-md animate-pulse">
-                    <span className="text-3xl sm:text-4xl font-black">?</span>
+                  <div className="w-full h-full rounded-2xl bg-[#10b981] text-white flex items-center justify-center shadow-sm animate-pulse">
+                    <span className="text-2xl sm:text-3xl font-black">?</span>
                   </div>
                 ) : (
-                  /* Clean Direct Shape Box - Large, Crisp, No Circle Border */
-                  <div className="w-full h-full rounded-2xl border border-neutral-200/90 bg-neutral-50/40 hover:bg-white flex items-center justify-center p-2 sm:p-2.5 shadow-2xs transition-all">
-                    <div className="w-full h-full flex items-center justify-center">
+                  /* Clean Shape Box - Scaled to 70% with breathing room */
+                  <div className="w-full h-full rounded-2xl border border-neutral-200/90 bg-neutral-50/40 hover:bg-white flex items-center justify-center shadow-2xs transition-all">
+                    <div className="w-[70%] h-[70%] flex items-center justify-center">
                       {cell.svg}
                     </div>
                   </div>
@@ -61,13 +61,13 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
 
         {/* Section Label */}
         <div className="text-center mb-3">
-          <h3 className="text-sm sm:text-base font-bold text-[#0B1419]">
+          <h3 className="text-xs sm:text-sm font-semibold text-neutral-700">
             Choose your answer
           </h3>
         </div>
 
-        {/* Answer Options (A, B, C, D, E, F) - Direct Full-Sized Shapes */}
-        <div className={`grid gap-2 sm:gap-3 mb-5 ${
+        {/* Answer Options (A, B, C, D, E, F) - Scaled to 70% */}
+        <div className={`grid gap-2 sm:gap-2.5 mb-4 ${
           question.options.length <= 4 
             ? 'grid-cols-2 sm:grid-cols-4' 
             : 'grid-cols-3 sm:grid-cols-6'
@@ -77,22 +77,22 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
               key={opt.id}
               type="button"
               onClick={() => handleSelect(opt)}
-              className={`aspect-square rounded-2xl p-2 sm:p-2.5 flex flex-col justify-between border-2 transition-all cursor-pointer relative group ${
+              className={`aspect-square rounded-xl p-1.5 sm:p-2 flex flex-col justify-between border-2 transition-all cursor-pointer relative group ${
                 selectedOpt === opt.id
-                  ? 'border-[#F26207] bg-orange-50/60 ring-2 ring-[#F26207]/30 shadow-md scale-95'
+                  ? 'border-[#F26207] bg-orange-50/60 ring-2 ring-[#F26207]/30 shadow-sm scale-95'
                   : 'border-neutral-200/90 bg-neutral-50/40 hover:bg-white hover:border-[#F26207] hover:shadow-xs'
               }`}
             >
               {/* Option Letter Tag in Top-Left */}
-              <span className={`text-[11px] sm:text-xs font-black font-mono text-left transition-colors ${
+              <span className={`text-[10px] sm:text-xs font-bold font-mono text-left transition-colors ${
                 selectedOpt === opt.id ? 'text-[#F26207]' : 'text-neutral-400 group-hover:text-[#0B1419]'
               }`}>
                 {opt.id}
               </span>
 
-              {/* Direct Graphic - Large and fully visible */}
-              <div className="w-full flex-1 flex items-center justify-center p-0.5">
-                <div className="w-full h-full flex items-center justify-center">
+              {/* Graphic Icon - 70% Scale */}
+              <div className="w-full flex-1 flex items-center justify-center">
+                <div className="w-[70%] h-[70%] flex items-center justify-center">
                   {opt.svg}
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
           <button
             type="button"
             onClick={onSkip}
-            className="text-xs sm:text-sm font-bold text-neutral-500 hover:text-[#0B1419] transition-colors cursor-pointer py-1 px-4 rounded-lg hover:bg-neutral-100"
+            className="text-xs font-semibold text-neutral-500 hover:text-[#0B1419] transition-colors cursor-pointer py-1 px-3 rounded-lg hover:bg-neutral-100"
           >
             Skip
           </button>
@@ -113,7 +113,7 @@ export default function QuizStep({ question, questionIndex, totalQuestions, onAn
       </div>
 
       {/* Centered Bottom Pagination */}
-      <div className="flex items-center justify-center gap-2 mt-5 text-xs text-neutral-500 font-mono">
+      <div className="flex items-center justify-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
         <button
           type="button"
           disabled={questionIndex === 0}

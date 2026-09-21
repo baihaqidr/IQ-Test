@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle2, Loader2, Sparkles, Brain } from 'lucide-react';
+import { CheckCircle2, Loader2, Brain, Sparkles } from 'lucide-react';
 
 const checklist = [
-  "Mengukur kecepatan respon kognitif...",
-  "Menganalisis konsistensi penalaran logika matriks...",
-  "Membandingkan dengan 1.250.000+ data responden di Indonesia...",
-  "Menghitung skor IQ final dan menyiapkan sertifikat digital..."
+  "Mengukur kecepatan respon & konsistensi logika...",
+  "Memetakan Arketipe Kognitif & Pola Pikir dominan...",
+  "Mengkalibrasi skor dengan 2.400.000+ benchmark populasi...",
+  "Menyusun Laporan Analisis Eksekutif & Sertifikat Digital..."
 ];
 
 export default function CalculatingLoader({ onComplete }) {
@@ -16,17 +16,16 @@ export default function CalculatingLoader({ onComplete }) {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(onComplete, 600);
+          setTimeout(onComplete, 500);
           return 100;
         }
         return prev + 1;
       });
-    }, 45); // ~4.5 seconds total calculation time
+    }, 40);
 
     return () => clearInterval(timer);
   }, [onComplete]);
 
-  // Radius for circular progress
   const radius = 54;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -40,7 +39,7 @@ export default function CalculatingLoader({ onComplete }) {
             cx="60"
             cy="60"
             r={radius}
-            className="text-slate-200"
+            className="text-slate-100"
             strokeWidth="8"
             stroke="currentColor"
             fill="transparent"
@@ -49,7 +48,7 @@ export default function CalculatingLoader({ onComplete }) {
             cx="60"
             cy="60"
             r={radius}
-            className="text-sky-600 transition-all duration-75 ease-linear"
+            className="text-indigo-600 transition-all duration-75 ease-linear"
             strokeWidth="8"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
@@ -60,20 +59,20 @@ export default function CalculatingLoader({ onComplete }) {
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-black text-slate-900">{progress}%</span>
-          <span className="text-[10px] uppercase font-bold text-sky-600 tracking-wider">Kalkulasi</span>
+          <span className="text-3xl font-black text-slate-950">{progress}%</span>
+          <span className="text-[10px] uppercase font-bold text-indigo-600 tracking-wider">Menganalisis</span>
         </div>
       </div>
 
-      <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
-        Menganalisis Hasil Kognitif Anda...
+      <h2 className="text-2xl font-extrabold text-slate-950 mb-2">
+        Memproses Profil Kognitif Anda...
       </h2>
       <p className="text-xs sm:text-sm text-slate-500 mb-8">
-        Sistem algoritma standar WAIS-IV sedang mengkalibrasi seluruh jawaban Anda.
+        Personality.co Psychometric Engine sedang menyusun arketipe kecerdasan Anda.
       </p>
 
       {/* Dynamic Checklist Box */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-card text-left space-y-3.5">
+      <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-soft text-left space-y-3.5">
         {checklist.map((item, index) => {
           const threshold = (index + 1) * 25;
           const isDone = progress >= threshold;
@@ -86,16 +85,16 @@ export default function CalculatingLoader({ onComplete }) {
                 isDone
                   ? 'text-slate-900 font-medium'
                   : isActive
-                  ? 'text-sky-700 font-semibold'
+                  ? 'text-indigo-700 font-semibold'
                   : 'text-slate-400'
               }`}
             >
               {isDone ? (
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
               ) : isActive ? (
-                <Loader2 className="w-4 h-4 text-sky-600 animate-spin shrink-0" />
+                <Loader2 className="w-4 h-4 text-indigo-600 animate-spin shrink-0" />
               ) : (
-                <div className="w-4 h-4 rounded-full border border-slate-300 shrink-0" />
+                <div className="w-4 h-4 rounded-full border border-slate-200 shrink-0" />
               )}
               <span>{item}</span>
             </div>

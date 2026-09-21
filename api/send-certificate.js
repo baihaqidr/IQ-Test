@@ -20,51 +20,62 @@ export default async function handler(req, res) {
 
   const brevoApiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.SENDER_EMAIL || 'baihaqidr@gmail.com';
-  const senderName = process.env.SENDER_NAME || 'Tes IQ Resmi Indonesia';
+  const senderName = process.env.SENDER_NAME || 'Personality.co Official';
 
   if (!brevoApiKey) {
     console.error('BREVO_API_KEY is missing in Vercel Environment Variables');
     return res.status(500).json({ error: 'BREVO_API_KEY belum dikonfigurasi di Environment Variables Vercel.' });
   }
 
+  // Template Email HTML Resmi Berdesain Personality.co Executive Dossier
   const emailHtml = `
     <!DOCTYPE html>
     <html lang="id">
     <head>
       <meta charset="utf-8">
       <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; }
-        .header { background: linear-gradient(135deg, #0284c7, #4f46e5); color: #ffffff; padding: 32px 24px; text-align: center; }
-        .header h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-        .header p { margin: 6px 0 0 0; font-size: 13px; opacity: 0.9; }
-        .content { padding: 32px 24px; }
-        .score-card { background: #0f172a; color: #ffffff; border-radius: 12px; padding: 24px; text-align: center; margin: 24px 0; }
-        .score-num { font-size: 48px; font-weight: 900; color: #38bdf8; margin: 4px 0; }
-        .badge { display: inline-block; background: rgba(56, 189, 248, 0.2); color: #7dd3fc; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: bold; }
-        .details-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
-        .details-table td { padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
-        .details-table td:last-child { text-align: right; font-weight: bold; }
-        .certificate-box { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; background: #fafaf9; text-align: center; margin: 24px 0; }
-        .btn { display: inline-block; background: linear-gradient(135deg, #0284c7, #4f46e5); color: #ffffff !important; padding: 14px 28px; border-radius: 10px; font-weight: bold; text-decoration: none; font-size: 14px; margin-top: 16px; }
-        .footer { background: #f8fafc; padding: 20px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #0f172a; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        .header { background: #090d16; color: #ffffff; padding: 36px 24px; text-align: center; }
+        .logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: #ffffff; }
+        .logo-accent { color: #6366f1; }
+        .header p { margin: 6px 0 0 0; font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .content { padding: 36px 24px; }
+        .archetype-box { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 14px; padding: 18px; margin-bottom: 24px; }
+        .archetype-title { font-size: 12px; font-weight: bold; text-transform: uppercase; color: #4338ca; letter-spacing: 0.5px; margin: 0 0 4px 0; }
+        .archetype-name { font-size: 18px; font-weight: 900; color: #1e1b4b; margin: 0; }
+        .score-card { background: #090d16; color: #ffffff; border-radius: 16px; padding: 28px; text-align: center; margin: 24px 0; }
+        .score-num { font-size: 52px; font-weight: 900; color: #818cf8; margin: 6px 0; letter-spacing: -1px; }
+        .badge { display: inline-block; background: rgba(99, 102, 241, 0.2); color: #a5b4fc; padding: 6px 16px; border-radius: 9999px; font-size: 12px; font-weight: bold; border: 1px solid rgba(99, 102, 241, 0.3); }
+        .details-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+        .details-table td { padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+        .details-table td:last-child { text-align: right; font-weight: bold; color: #0f172a; }
+        .btn { display: inline-block; background: #090d16; color: #ffffff !important; padding: 16px 32px; border-radius: 12px; font-weight: bold; text-decoration: none; font-size: 14px; margin-top: 20px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .footer { background: #f8fafc; padding: 24px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e2e8f0; }
       </style>
     </head>
     <body>
       <div class="container">
         <div class="header">
-          <h1>SERTIFIKAT HASIL TES IQ RESMI</h1>
-          <p>Worldwide IQ Test Authority • Standar WAIS-IV Internasional</p>
+          <div class="logo-text">personality<span class="logo-accent">.co</span></div>
+          <p>Executive Cognitive Assessment • Standard WAIS-IV Normed</p>
         </div>
         
         <div class="content">
-          <p>Halo <strong>${name}</strong>,</p>
-          <p>Selamat! Evaluasi kognitif dan matriks penalaran logika Anda telah selesai diproses dan divalidasi oleh sistem.</p>
+          <p style="font-size: 15px;">Halo <strong>${name}</strong>,</p>
+          <p style="color: #64748b; line-height: 1.6; font-size: 13px;">
+            Selamat! Evaluasi kognitif penalaran matriks dan profil arketipe pemikiran Anda telah selesai diproses secara resmi oleh Personality.co Psychometric Engine.
+          </p>
           
+          <div class="archetype-box">
+            <div class="archetype-title">Arketipe Kognitif Terverifikasi</div>
+            <div class="archetype-name">The Strategic Architect / Mastermind</div>
+          </div>
+
           <div class="score-card">
-            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Skor Terverifikasi Anda</span>
-            <div class="score-num">${score} <span style="font-size: 18px; color: #94a3b8;">/ 145</span></div>
-            <div class="badge">${classification || 'Sangat Unggul / Superior Intelligence'}</div>
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Skor Terkalibrasi Anda</span>
+            <div class="score-num">${score} <span style="font-size: 20px; color: #64748b;">/ 145</span></div>
+            <div class="badge">${classification || 'Superior Intelligence (Top 4.8%)'}</div>
           </div>
 
           <table class="details-table">
@@ -74,10 +85,10 @@ export default async function handler(req, res) {
             </tr>
             <tr>
               <td style="color: #64748b;">Nomor Lisensi ID</td>
-              <td style="font-family: monospace; color: #0284c7;">${licenseId || 'WWIQ-ID-992140'}</td>
+              <td style="font-family: monospace; color: #4f46e5;">${licenseId || 'WWIQ-ID-992140'}</td>
             </tr>
             <tr>
-              <td style="color: #64748b;">Standar Kalibrasi</td>
+              <td style="color: #64748b;">Standar Psikometrik</td>
               <td>Wechsler Adult Intelligence Scale (WAIS-IV)</td>
             </tr>
             <tr>
@@ -86,19 +97,17 @@ export default async function handler(req, res) {
             </tr>
           </table>
 
-          <div class="certificate-box">
-            <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1e293b;">Unduh Sertifikat Digital & Laporan Lengkap</h3>
-            <p style="margin: 0; font-size: 12px; color: #64748b;">Sertifikat resolusi tinggi (PDF 300 DPI) siap dicetak dengan lisensi resmi.</p>
-            <a href="https://tes-iq-indonesia.vercel.app" class="btn">Unduh Sertifikat PDF</a>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="https://tes-iq-indonesia.vercel.app" class="btn">Buka Sertifikat & Dossier Lengkap</a>
           </div>
 
-          <p style="font-size: 12px; color: #64748b; line-height: 1.6;">
-            Jika Anda membutuhkan verifikasi keaslian dokumen ini, silakan gunakan nomor lisensi di atas pada portal verifikasi resmi kami.
+          <p style="font-size: 12px; color: #94a3b8; line-height: 1.6;">
+            Jika Anda membutuhkan verifikasi keaslian sertifikat ini, silakan gunakan nomor lisensi di atas pada portal verifikasi resmi Personality.co.
           </p>
         </div>
 
         <div class="footer">
-          <p>© 2026 Worldwide IQ Test Authority. Seluruh Hak Cipta Dilindungi.<br>
+          <p>© 2026 Personality.co. All Rights Reserved.<br>
           Email ini dikirimkan secara otomatis ke ${email}.</p>
         </div>
       </div>
@@ -117,7 +126,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         sender: { name: senderName, email: senderEmail },
         to: [{ email: email.trim(), name: name.trim() }],
-        subject: `[Sertifikat Resmi] Hasil Tes IQ Anda: Skor ${score} - ${name}`,
+        subject: `[Personality.co] Laporan Profil Kognitif & Sertifikat IQ: Skor ${score} - ${name}`,
         htmlContent: emailHtml,
       }),
     });

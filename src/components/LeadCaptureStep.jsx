@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, ShieldCheck, ArrowRight, Award, Lock } from 'lucide-react';
+import { User, Mail, ShieldCheck, ArrowRight, Award, Lock, Sparkles } from 'lucide-react';
 
 export default function LeadCaptureStep({ onSubmit }) {
   const [name, setName] = useState('');
@@ -21,33 +21,33 @@ export default function LeadCaptureStep({ onSubmit }) {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-8 sm:py-12">
+    <div className="max-w-md mx-auto px-4 py-8 sm:py-14">
       {/* Top Badge */}
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold mb-3">
-          <Award className="w-4 h-4" />
-          <span>Hasil Tes Anda Sudah Siap!</span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-3">
+          <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+          <span>Hasil Evaluasi Kognitif Siap!</span>
         </div>
-        <h2 className="text-2xl font-extrabold text-slate-900">
-          Siapkan Sertifikat Resmi Anda
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950">
+          Terbitkan Sertifikat Resmi Anda
         </h2>
-        <p className="mt-2 text-xs sm:text-sm text-slate-600">
-          Masukkan nama lengkap dan email Anda untuk mencetak sertifikat digital serta laporan analisis IQ mendalam.
+        <p className="mt-2 text-xs sm:text-sm text-slate-500 font-normal">
+          Masukkan nama lengkap dan email Anda untuk mencetak Sertifikat Eksekutif serta Dossier Analisis 15 Halaman.
         </p>
       </div>
 
       {/* Form Card */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-card">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft">
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
               {error}
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Nama Lengkap (Sesuai Sertifikat) <span className="text-sky-600">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-800 mb-1.5">
+              Nama Lengkap (Untuk Sertifikat) <span className="text-indigo-600">*</span>
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -58,15 +58,15 @@ export default function LeadCaptureStep({ onSubmit }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Contoh: Muhammad Baihaqi"
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm font-medium text-slate-900"
+                className="w-full pl-10 pr-4 py-3.5 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 text-sm font-medium text-slate-900 bg-slate-50/50"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Alamat Email <span className="text-sky-600">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-800 mb-1.5">
+              Alamat Email Penerima <span className="text-indigo-600">*</span>
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -77,21 +77,21 @@ export default function LeadCaptureStep({ onSubmit }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="nama@email.com"
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm font-medium text-slate-900"
+                className="w-full pl-10 pr-4 py-3.5 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 text-sm font-medium text-slate-900 bg-slate-50/50"
                 required
               />
             </div>
-            <p className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+            <p className="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1">
               <Lock className="w-3 h-3 text-slate-400" />
-              Laporan hasil & sertifikat PDF akan dikirimkan ke email ini.
+              Laporan PDF & Sertifikat Digital akan dikirimkan otomatis ke email ini.
             </p>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-sky-600 to-indigo-600 text-white shadow-lg shadow-sky-500/25 hover:opacity-95 flex items-center justify-center gap-2 cursor-pointer transition-all mt-6"
+            className="w-full py-4 rounded-2xl font-bold text-sm sm:text-base bg-slate-950 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2 cursor-pointer transition-all mt-6"
           >
-            <span>Lihat Skor & Buka Sertifikat</span>
+            <span>Buka Skor & Sertifikat Saya</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
@@ -99,7 +99,7 @@ export default function LeadCaptureStep({ onSubmit }) {
 
       <div className="mt-6 text-center text-xs text-slate-400 flex items-center justify-center gap-1.5">
         <ShieldCheck className="w-4 h-4 text-emerald-500" />
-        <span>Data Anda terenkripsi aman dan tidak dipublikasikan ke publik.</span>
+        <span>Personality.co menjamin 100% privasi dan enkripsi data pribadi Anda.</span>
       </div>
     </div>
   );

@@ -7,7 +7,6 @@ import LeadCaptureStep from './components/LeadCaptureStep';
 import ResultsPaywall from './components/ResultsPaywall';
 import CheckoutModal from './components/CheckoutModal';
 import { questions } from './data/questions';
-import { saveQuizResultToSupabase, updatePaymentStatus } from './lib/supabase';
 
 export default function App() {
   const [step, setStep] = useState('demographics'); // demographics | quiz | calculating | lead_capture | results
@@ -66,18 +65,26 @@ export default function App() {
     setUserData(lead);
     setStep('results');
 
-    // 1. Simpan Lead & Data ke Supabase
-    await saveQuizResultToSupabase({
-      name: lead.name,
-      email: lead.email,
-      gender: demographics.gender,
-      ageGroup: demographics.ageGroup,
-      score: calculatedScore,
-      licenseId: licenseId,
-      answers: userAnswers,
-      utmParams: utmParams,
-      status: 'completed'
-    });
+    // 1. Simpan Lead & Hasil ke Database Neon via API Serverless
+    try {
+      await fetch('/api/submit-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: lead.name,
+          email: lead.email,
+          gender: demographics.gender,
+          ageGroup: demographics.ageGroup,
+          score: calculatedScore,
+          licenseId: licenseId,
+          answers: userAnswers,
+          utmParams: utmParams,
+          status: 'completed'
+        })
+      });
+    } catch (err) {
+      console.warn('API submit-quiz error (simulated locally):', err);
+    }
 
     // 2. Trigger kirim email via Serverless API
     try {
@@ -93,13 +100,29 @@ export default function App() {
         })
       });
     } catch (e) {
-      console.warn('API send-certificate call failed (expected on local vite dev server without vercel dev):', e);
+      console.warn('API send-certificate error:', e);
     }
   };
 
   const handlePaymentSuccess = async () => {
-    // Update status di Supabase ke 'paid'
-    await updatePaymentStatus(licenseId);
+    // Update status ke 'paid' di Neon PostgreSQL
+    try {
+      await fetch('/api/submit-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: userData.name,
+          email: userData.email,
+          gender: demographics.gender,
+          ageGroup: demographics.ageGroup,
+          score: calculatedScore,
+          licenseId: licenseId,
+          status: 'paid'
+        })
+      });
+    } catch (err) {
+      console.warn('Payment status update error:', err);
+    }
   };
 
   return (
